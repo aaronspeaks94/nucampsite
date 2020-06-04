@@ -161,6 +161,3 @@ export const COMMENTS =
         date: "2019-02-18T18:12Z"
     }
 ]
-
-
-

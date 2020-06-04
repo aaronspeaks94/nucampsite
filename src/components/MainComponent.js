@@ -4,21 +4,32 @@ import CampsiteInfo from './CampsiteInfoComponent.js';
 import Header from './HeaderComponent.js';
 import Footer from './FooterComponent.js';
 import Home from './HomeComponent.js';
+import Contact from './ContactComponent.js';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { CAMPSITES } from '../shared/campsites.js';
+import { COMMENTS } from '../shared/comments.js';
+import { PARTNERS } from '../shared/partners.js';
+import { PROMOTIONS } from '../shared/promotions.js';
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
       campsites: CAMPSITES,
+      comments: COMMENTS,
+      partners: PARTNERS,
+      promotions: PROMOTIONS
     };
   }
   
   render() {
     const HomePage = () => {
       return (
-        <Home />
+        <Home
+          campsite={this.state.campsites.filter(campsite => campsite.featured)[0]}
+          promotion={this.state.promotions.filter(promotion => promotion.featured)[0]}
+          partner={this.state.partners.filter(partner => partner.featured)[0]}
+         />
       );
     }
 
@@ -28,6 +39,7 @@ class Main extends Component {
         <Switch>
           <Route path='/home' component={HomePage} />
           <Route exact path='/directory' render={() => <Directory campsites={this.state.campsites} />} />
+          <Route exact path='/contactus' component={Contact} />
           <Redirect to='/home' />
         </Switch>
         <Footer />
