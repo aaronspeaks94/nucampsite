@@ -1,12 +1,7 @@
-import React, { Component } from "react";
-import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button,
-    Modal, ModalHeader, ModalBody, Label, Row, Col } from 'reactstrap';
+import React from "react";
+import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, LocalForm, Errors } from 'react-redux-form'
 
-const required = val => val && val.length;
-const maxLength = len => val => !val || (val.length <= len);
-const minLength = len => val => val && (val.length >= len);
 
 function RenderCampsite({campsite}) {
     return(
@@ -122,7 +117,6 @@ function RenderComments({comments}) {
                         </div>
                     );
                 })}
-                <CommentForm />
             </div>
         );
     }
