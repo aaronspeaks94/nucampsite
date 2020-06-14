@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Directory from './DirectoryComponent.js';
-import About from './AboutComponent.js'
-import CampsiteInfo from './CampsiteInfoComponent.js';
 import Header from './HeaderComponent.js';
 import Footer from './FooterComponent.js';
 import Home from './HomeComponent.js';
+import Directory from './DirectoryComponent.js';
+import About from './AboutComponent.js'
+import CampsiteInfo from './CampsiteInfoComponent.js';
 import Contact from './ContactComponent.js';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
