@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Row, Label, Col } from 'reactstrap';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
@@ -18,6 +19,25 @@ function RenderCampsite({campsite}) {
             </Card>
         </div>
     );
+}
+
+function RenderComments({comments, addComment, campsiteId}) {
+    if(comments) {
+        return(
+            <div className="col-md-5 m-1">
+                <h4>Comments</h4>
+                {comments.map(comment => {
+                    return(
+                        <div>
+                            <p>{comment.text}</p>
+                            <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                        </div>
+                    );
+                })}
+                <CommentForm campsiteId={campsiteId} addComment={addComment} />
+            </div>
+        );
+    }
 }
 
 class CommentForm extends Component {
@@ -108,26 +128,27 @@ class CommentForm extends Component {
     }
 }
 
-function RenderComments({comments, addComment, campsiteId}) {
-    if(comments) {
-        return(
-            <div className="col-md-5 m-1">
-                <h4>Comments</h4>
-                {comments.map(comment => {
-                    return(
-                        <div>
-                            <p>{comment.text}</p>
-                            <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
-                        </div>
-                    );
-                })}
-                <CommentForm campsiteId={campsiteId} addComment={addComment} />
+function CampsiteInfo(props) {
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
             </div>
         );
     }
-}
-    
-function CampsiteInfo(props) {
+    if (props.errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     if(props.campsite) {
         return (
             <div className="container">
