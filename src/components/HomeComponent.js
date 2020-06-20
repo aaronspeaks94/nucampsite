@@ -11,13 +11,13 @@ function RenderCard({item, isLoading, errMess }) {
         return <h4>{errMess}</h4>
     }
     return(
-        item?<Card>
+        <Card>
             <CardImg src={baseUrl + item.image} alt={item.name} />
             <CardBody>
                 <CardTitle>{item.name}</CardTitle>
                 <CardText>{item.description}</CardText>
             </CardBody>
-        </Card>:null
+        </Card>
     )
 }
 
